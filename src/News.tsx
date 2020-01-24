@@ -7,7 +7,7 @@ const NewsWrapper = styled.div``;
 
 const News: FC<RouteComponentProps > = () => {
     return (
-        <NewsWrapper />
+        <NewsWrapper>123</NewsWrapper>
     )
 };
 

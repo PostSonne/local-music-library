@@ -6,6 +6,7 @@ import {
     RouteComponentProps
 } from "@reach/router";
 import { News } from "./News";
+import { About } from "./About";
 
 interface IAppProps extends RouteComponentProps {
     name: string;
@@ -23,11 +24,8 @@ const App: FC<IAppProps> = () => {
                 <Navigation>
                     <Link to="/">Home</Link>
                     <Link to="news">News</Link>
+                    <Link to="/about/smth">About</Link>
                 </Navigation>
-                <Greeting>
-                    Hello, {name}
-                </Greeting>
-                ...children
             </MainWrapper>
         </div>
     )
@@ -41,10 +39,14 @@ const App: FC<IAppProps> = () => {
   )
 };*/
 
-const AppWithRoutes = () => {
+const AppWithRoutes = (name: string) => {
     return (
         <App path = "/" name = "Kotik">
+            <Greeting>
+                Hello, {name}
+            </Greeting>
             <News path="/news"/>
+            <About path="/about/:source" />
         </App>
     );
 };
