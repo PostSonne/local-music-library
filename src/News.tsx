@@ -1,7 +1,6 @@
+import { RouteComponentProps } from "@reach/router";
 import React, { FC } from "react";
 import styled from "styled-components";
-import { RouteComponentProps } from "@reach/router";
-
 
 const NewsWrapper = styled.div``;
 

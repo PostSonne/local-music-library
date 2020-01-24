@@ -1,53 +1,53 @@
-import * as React from "react";
-import styled from "styled-components";
-import { FC } from "react";
 import {
     Link,
-    RouteComponentProps
+    RouteComponentProps,
+    Router
 } from "@reach/router";
-import { News } from "./News";
+import * as React from "react";
+import { FC } from "react";
+import styled from "styled-components";
 import { About } from "./About";
+import { News } from "./News";
 
 interface IAppProps extends RouteComponentProps {
     name: string;
-    path: string;
+    // path: string;
 }
 
+const Greeting = styled.div`
+    color: red;
+`;
+
+
 const MainWrapper = styled.div``;
-const Greeting = styled.div``;
+
 const Navigation = styled.div``;
 
-const App: FC<IAppProps> = () => {
+const App: FC<IAppProps> = (props) => {
     return (
-        <div>
-            <MainWrapper>
-                <Navigation>
-                    <Link to="/">Home</Link>
-                    <Link to="news">News</Link>
-                    <Link to="/about/smth">About</Link>
-                </Navigation>
-            </MainWrapper>
-        </div>
+        <MainWrapper>
+            <Navigation>
+                <Link to="/">Home</Link>
+                <Link to="news">News</Link>
+                <Link to="/about/library">Music Library</Link>
+            </Navigation>
+            <Greeting>
+                Hello, {props.name}
+            </Greeting>
+            {props.children}
+        </MainWrapper>
     )
 };
 
-/*const ExtraOptions = () => {
-  return (
-      <div>
-          There is some information
-      </div>
-  )
-};*/
-
-const AppWithRoutes = (name: string) => {
+const AppWithRoutes = () => {
     return (
-        <App path = "/" name = "Kotik">
-            <Greeting>
-                Hello, {name}
-            </Greeting>
-            <News path="/news"/>
-            <About path="/about/:source" />
-        </App>
+        <Router>
+            <App path = "/" name = "Kotik">
+                {/*<Main path="/" />*/}
+                <News path="/news"/>
+                <About path="/about/:source"/>
+            </App>
+        </Router>
     );
 };
 
