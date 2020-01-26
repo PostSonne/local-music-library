@@ -1,7 +1,7 @@
 import { navigate } from "@reach/router";
 import { IUserIdentity } from "../model/user";
 
-interface IAuthResponse {
+export interface IAuthResponse {
     status: number;
     data: string;
     errorText?: string;
