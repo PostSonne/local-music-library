@@ -1,36 +1,40 @@
-import React, { FC, useState } from "react";
-import { RouteComponentProps, navigate } from "@reach/router";
+import { navigate, RouteComponentProps } from "@reach/router";
+import React, { useState } from "react";
+import { authectificate} from "../api/auth";
 import { IUserIdentity } from "../model/user";
-import { authectificate, IAuthResponse } from "../api/auth";
 
 const Login: React.FC<RouteComponentProps> = () => {
     const [user, setField] = useState<IUserIdentity>({
         username: "",
         password: "",
     });
-    const [notification, setNotification] = useState<IAuthResponse | string>("");
-    const onInputChange = (fieldName: string) => 
-        (e: React.SyntheticEvent<HTMLInputElement>): void => {
+
+    const [notification, setNotification] = useState<string>("");
+
+    const onInputChange = (fieldName: string) => (e: React.SyntheticEvent<HTMLInputElement>): void => {
             setField({
                 ...user,
                 [fieldName]: e.currentTarget.value,
-            })
+            });
         setNotification("")
     };
-    const onSubmit = (e: React.SyntheticEvent<HTMLFontElement>): void => {
+
+    const onSubmit = (e: React.SyntheticEvent<HTMLFormElement>): void => {
         e.preventDefault();
         authectificate(user)
         .then(() => {
-            navigate(`/propfile`)
+            navigate(`/profile`)
         })
         .catch(err => {
             if (err.errorText) {
-                setNotification.errorText;
+                setNotification(err.errorText);
             } else {
+                // tslint:disable-next-line:no-console
                 console.warn('request problem', err)
             }
         })
-    }
+    };
+
     return (
         <>
             <h2>Login</h2>
@@ -42,7 +46,7 @@ const Login: React.FC<RouteComponentProps> = () => {
                     onChange={onInputChange("username")}
                 />
                 <input
-                    type="text"
+                    type="password"
                     value={user.password}
                     onChange={onInputChange("password")}
                 />
