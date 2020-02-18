@@ -45,7 +45,6 @@ const News: FC<RouteComponentProps > = () => {
 
 export {News}
 
-
 const fakeData = [
     {
         id: 1,
